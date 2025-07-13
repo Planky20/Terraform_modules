@@ -22,3 +22,13 @@ variable "vnet_subnet_count" {
   type        = number
   description = "This defines the number of subnets in the virtual network"
 }
+
+variable "network_interfaces_count" {
+  type        = number
+  description = "This defines the number of network interfaces"
+}
+
+variable "public_ip_adresses_count" {
+  type        = number
+  description = "This defiens the number of public ip addresses"
+}
