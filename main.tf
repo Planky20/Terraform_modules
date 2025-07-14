@@ -18,9 +18,10 @@ module "network" {
 }
 
 module "machines" {
-  source                        = "./modules/compute/virtualMachines"
-  resource_group_name           = var.resource_group_name
-  location                      = var.location
-  virtual_machine_count         = var.virtual_machine_count
-  virtual_network_interface_ids = module.network.virtual_network_interfaces_ids
+  source                               = "./modules/compute/virtualMachines"
+  resource_group_name                  = var.resource_group_name
+  location                             = var.location
+  virtual_machine_count                = var.virtual_machine_count
+  virtual_network_interface_ids        = module.network.virtual_network_interfaces_ids # Output value from vnet module
+  virtual_machines_public_ip_addresses = module.network.public_ip_addresses            # Output value from vnet module
 }

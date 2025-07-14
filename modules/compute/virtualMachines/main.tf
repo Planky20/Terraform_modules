@@ -5,7 +5,7 @@ resource "azurerm_linux_virtual_machine" "appvm" {
   location                        = var.location
   size                            = "Standard_B1s"
   admin_username                  = "linuxadmin"
-  admin_password                  = "VM password"
+  admin_password                  = "VMpassword"
   disable_password_authentication = false
   custom_data                     = data.local_file.cloudinit.content_base64
   network_interface_ids = [
