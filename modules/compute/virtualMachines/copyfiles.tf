@@ -8,7 +8,7 @@ resource "null_resource" "addfiles" {
     connection {
       type     = "ssh"
       user     = "linuxadmin"
-      password = "Azure@123"
+      password = "VMpassword"
       host     = var.virtual_machines_public_ip_addresses[count.index]
     }
   }
@@ -17,7 +17,7 @@ resource "null_resource" "addfiles" {
     connection {
       type     = "ssh"
       user     = "linuxadmin"
-      password = "Azure@123"
+      password = "VMpassword"
       host     = var.virtual_machines_public_ip_addresses[count.index]
     }
     inline = ["sudo mv /home/linuxadmin/Default.html /var/www/html/Default.html"]

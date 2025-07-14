@@ -25,3 +25,12 @@ module "machines" {
   virtual_network_interface_ids        = module.network.virtual_network_interfaces_ids # Output value from vnet module
   virtual_machines_public_ip_addresses = module.network.public_ip_addresses            # Output value from vnet module
 }
+
+module "load-balancer" {
+  source                               = "./modules/networking/loadbalancer"
+  resource_group_name                  = var.resource_group_name
+  location                             = var.location
+  number_of_LB_backend_pool_machines   = var.virtual_machine_count
+  virtual_network_id                   = module.network.virtual_network_id                   # Output value from vnet module
+  network_interface_private_ip_address = module.network.network_interface_private_ip_address # Output value from vnet module
+}
