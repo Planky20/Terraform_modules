@@ -42,3 +42,8 @@ variable "network_security_group_rules" {
   ))
   description = "This defnies the NSG rules"
 }
+
+variable "virtual_machine_count" {
+  type        = number
+  description = "This defines the number of virtual machines"
+}
