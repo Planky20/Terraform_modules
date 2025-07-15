@@ -17,15 +17,6 @@ module "network" {
   depends_on                   = [module.resource-group]
 }
 
-module "machines" {
-  source                               = "./modules/compute/virtualMachines"
-  resource_group_name                  = var.resource_group_name
-  location                             = var.location
-  virtual_machine_count                = var.virtual_machine_count
-  virtual_network_interface_ids        = module.network.virtual_network_interfaces_ids # Output value from vnet module
-  virtual_machines_public_ip_addresses = module.network.public_ip_addresses            # Output value from vnet module
-}
-
 module "load-balancer" {
   source                               = "./modules/networking/loadbalancer"
   resource_group_name                  = var.resource_group_name
@@ -33,4 +24,12 @@ module "load-balancer" {
   number_of_LB_backend_pool_machines   = var.virtual_machine_count
   virtual_network_id                   = module.network.virtual_network_id                   # Output value from vnet module
   network_interface_private_ip_address = module.network.network_interface_private_ip_address # Output value from vnet module
+}
+
+module "vm-scale-set" {
+  source                     = "./modules/compute/scalesets"
+  resource_group_name        = var.resource_group_name
+  location                   = var.location
+  virtual_network_subnet_ids = module.network.virtual_network_subnet_id     # Output value from vnet module
+  virtual_machine_pool_id    = module.load-balancer.backend_address_pool_id # Output value from load-balancer module
 }
